@@ -11,16 +11,16 @@ public class GroundChecker : MonoBehaviour
 
     private void Update()
     {
-        IsGrounded = Physics.CheckSphere(_checkerTransform.position, _checkerRadius, _groundLayer);
-
-        if (IsGrounded)
-            Gizmos.color = Color.yellow;
-        else
-            Gizmos.color = Color.red;
+        IsGrounded = Physics.CheckSphere(_checkerTransform.position, _checkerRadius, _groundLayer);        
     }
 
     private void OnDrawGizmos()
     {
+        if (IsGrounded)
+            Gizmos.color = Color.yellow;
+        else
+            Gizmos.color = Color.red;
+
         Gizmos.DrawSphere(_checkerTransform.position, _checkerRadius);        
     }
 }
