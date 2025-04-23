@@ -1,0 +1,26 @@
+using UnityEngine;
+
+public class GroundChecker : MonoBehaviour
+{
+    [SerializeField] private Transform _checkerTransform;
+
+    [SerializeField, Range(0, 1)] private float _checkerRadius;
+    [SerializeField] private LayerMask _groundLayer;
+
+    public bool IsGrounded {  get; private set; }
+
+    private void Update()
+    {
+        IsGrounded = Physics.CheckSphere(_checkerTransform.position, _checkerRadius, _groundLayer);
+
+        if (IsGrounded)
+            Gizmos.color = Color.yellow;
+        else
+            Gizmos.color = Color.red;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(_checkerTransform.position, _checkerRadius);        
+    }
+}
