@@ -6,18 +6,15 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField, Range(0, 100)] private float _moveSpeed;
-    [SerializeField, Range(0, 100)] private float _jumpPower;
+    [SerializeField, Range(0, 20)] private float _moveSpeed;
+    [SerializeField, Range(0, 20)] private float _jumpPower;
     [SerializeField, Range(0, 15)] private float _gravity;
+
+    [SerializeField] private Animator _anim;
 
     private CharacterInput _chInput;
     private GroundChecker _grChecker;
-    private Rigidbody _rb;
-
-    [SerializeField] private Transform _wallCheckerTop;
-    [SerializeField] private Transform _wallCheckerBot;
-    [SerializeField] private LayerMask _wallsLayer;
-    private bool _isWallFwd;
+    private Rigidbody _rb;    
 
     private void Awake()
     {
@@ -27,14 +24,14 @@ public class CharacterMovement : MonoBehaviour
     }
 
     private void Update()
-    {
-        _isWallFwd = Physics.CheckCapsule(_wallCheckerTop.position, _wallCheckerBot.position, 0.7f, _wallsLayer);
+    {        
         Jump();
     }
 
     private void FixedUpdate()
     {
-        Move();        
+        Move();
+        _anim.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));               
     }
 
     private void Move()
@@ -57,15 +54,5 @@ public class CharacterMovement : MonoBehaviour
             _rb.AddForce(_rb.linearVelocity.x, _jumpPower, _rb.linearVelocity.z, ForceMode.VelocityChange);
         else
             _rb.AddForce(_rb.linearVelocity.x, -_gravity, _rb.linearVelocity.z, ForceMode.Acceleration);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (_isWallFwd)
-            Gizmos.color = Color.red;
-        else
-            Gizmos.color = Color.green;
-
-        Gizmos.DrawSphere(transform.position, 0.7f);
-    }
+    }  
 }
