@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField, Range(0, 15)] private float _gravity;
 
     [SerializeField] private Animator _anim;
+    private bool _animFreeFall;
 
     private CharacterInput _chInput;
     private GroundChecker _grChecker;
@@ -26,12 +27,13 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {        
         Jump();
+        Move();
+        AnimationsController();
     }
 
     private void FixedUpdate()
     {
-        Move();
-        _anim.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));               
+        
     }
 
     private void Move()
@@ -40,7 +42,9 @@ public class CharacterMovement : MonoBehaviour
         {
             _rb.linearVelocity = new Vector2(_moveSpeed * _chInput.Move, _rb.linearVelocity.y);
             Rotation(_chInput.Move);
-        }        
+        }
+        else 
+            _rb.linearVelocity = new Vector2(Vector2.zero.x, _rb.linearVelocity.y);
     }
 
     private void Rotation(float direction)
@@ -50,9 +54,23 @@ public class CharacterMovement : MonoBehaviour
 
     private void Jump()
     {
+        if (_grChecker.IsGrounded)
+            _animFreeFall = false;
+
         if (_grChecker.IsGrounded && _chInput.Jump)
             _rb.AddForce(_rb.linearVelocity.x, _jumpPower, _rb.linearVelocity.z, ForceMode.VelocityChange);
-        else
+        else if (!_grChecker.IsGrounded)
+        {
             _rb.AddForce(_rb.linearVelocity.x, -_gravity, _rb.linearVelocity.z, ForceMode.Acceleration);
-    }  
+            _animFreeFall = true;
+        }
+    } 
+    
+    private void AnimationsController()
+    {
+        _anim.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));
+        _anim.SetBool("Grounded", _grChecker.IsGrounded);
+        _anim.SetBool("Jump", _chInput.Jump);
+        _anim.SetBool("FreeFall", _animFreeFall);
+    }
 }
