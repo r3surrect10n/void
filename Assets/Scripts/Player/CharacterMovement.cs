@@ -28,6 +28,7 @@ public class CharacterMovement : MonoBehaviour
     {        
         Jump();
         Move();
+        Attack();
         AnimationsController();
     }
 
@@ -65,6 +66,16 @@ public class CharacterMovement : MonoBehaviour
             _animFreeFall = true;
         }
     } 
+
+    private void Attack()
+    {
+        if (_chInput.Shoot)
+        {
+            Debug.Log("shoot");
+            _anim.SetBool("Attack", true);
+        }
+        else _anim.SetBool("Attack", false);
+    }
     
     private void AnimationsController()
     {
