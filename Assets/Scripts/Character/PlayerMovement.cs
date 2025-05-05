@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
@@ -6,13 +7,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Speed settings")]
     [SerializeField, Range(0, 20)] private float _moveSpeed;
+
+    [Header("Jump settings")]
     [SerializeField, Range(0, 20)] private float _jumpPower;
+    [SerializeField, Range(0, 2)] private float _jumpCooldown;
 
     private GroundChecker _grChecker;
     private Rigidbody _rb;
 
-    public float PlayerSpeed { get; private set; }
+    private bool _isReadyToJump;
+
+    public Vector2 PlayerSpeed { get; private set; }
+
+    private void Update()
+    {
+        Debug.Log(_rb.linearVelocity.x);
+        if (PlayerSpeed == Vector2.zero ) 
+            _rb.linearVelocity = new Vector2(Vector2.zero.x, _rb.linearVelocity.y);
+    }
 
     private void OnEnable()
     {
@@ -30,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _grChecker = GetComponent<GroundChecker>();
         _rb = GetComponent<Rigidbody>();
+
+        _isReadyToJump = true;
     }
 
     private void OnMove(float direction)
@@ -42,17 +58,28 @@ public class PlayerMovement : MonoBehaviour
         else
             _rb.linearVelocity = new Vector2(Vector2.zero.x, _rb.linearVelocity.y);
 
-        PlayerSpeed = _rb.linearVelocity.x;
+        PlayerSpeed = _rb.linearVelocity;
     }
 
     private void OnJump()
     {
-        if (_grChecker.IsGrounded)
+        if (_grChecker.IsGrounded && _isReadyToJump)
+        {
             _rb.AddForce(_rb.linearVelocity.x, _jumpPower, _rb.linearVelocity.z, ForceMode.Impulse);
+            StartCoroutine(JumpCD());
+        }
     }
 
     private void Rotation(float direction)
     {
         transform.rotation = Quaternion.Euler(transform.rotation.x, direction >= 0 ? 0 : 180, transform.rotation.z);
+    }
+
+    private IEnumerator JumpCD()
+    {
+        _isReadyToJump = false;
+        yield return new WaitForSeconds(_jumpCooldown);
+        _isReadyToJump = true;
+        StopCoroutine(JumpCD());
     }
 }
