@@ -6,11 +6,13 @@ public class AnimationController : MonoBehaviour
     
     private Animator _animC;
     private GroundChecker _grChecker;
+    private PlayerInput _plInput;
     private PlayerMovement _plMovement;
 
     private void Awake()
     {
         _animC = GetComponent<Animator>();
+        _plInput = GetComponentInParent<PlayerInput>();
         _plMovement = GetComponentInParent<PlayerMovement>();
         _grChecker = GetComponentInParent<GroundChecker>();
     }
@@ -19,6 +21,7 @@ public class AnimationController : MonoBehaviour
     {
         _animC.SetFloat("Speed", Mathf.Abs(_plMovement.PlayerSpeed.x));
         _animC.SetBool("IsGrounded", _grChecker.IsGrounded);
+        _animC.SetBool("IsScope", _plInput.Scope);
 
         switch (_plMovement.PlayerSpeed.y)
         {
@@ -36,13 +39,13 @@ public class AnimationController : MonoBehaviour
     private void OnEnable()
     {
         PlayerInput.Jump += AnimOnJump;
-        PlayerInput.Fire += AnimOnAttack;
+        //PlayerInput.Fire += AnimOnAttack;
     }
 
     private void OnDisable()
     {
         PlayerInput.Jump += AnimOnJump;
-        PlayerInput.Fire += AnimOnAttack;
+        //PlayerInput.Fire += AnimOnAttack;
     }
 
     private void AnimOnJump()
@@ -50,7 +53,7 @@ public class AnimationController : MonoBehaviour
         _animC.SetBool("IsJump", true);
     }
 
-    private void AnimOnAttack()
+    /*private void AnimOnAttack()
     {
         _animC.SetBool("Attack", true);
     }
@@ -64,5 +67,5 @@ public class AnimationController : MonoBehaviour
     {
         _animC.SetBool("Attack", false);
         _animC.SetBool("Attacking", false);
-    }
+    }*/   
 }
