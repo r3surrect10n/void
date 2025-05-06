@@ -1758,15 +1758,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706116324578008, guid: 054873fb4d8fb414f9c75a47ff19cfe1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.096
+      value: 0.1215
       objectReference: {fileID: 0}
     - target: {fileID: 4706116324578008, guid: 054873fb4d8fb414f9c75a47ff19cfe1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.009
+      value: 0.0315
       objectReference: {fileID: 0}
     - target: {fileID: 4706116324578008, guid: 054873fb4d8fb414f9c75a47ff19cfe1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.027
+      value: -0.023
       objectReference: {fileID: 0}
     - target: {fileID: 4706116324578008, guid: 054873fb4d8fb414f9c75a47ff19cfe1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1795,6 +1795,10 @@ PrefabInstance:
     - target: {fileID: 4706116324578008, guid: 054873fb4d8fb414f9c75a47ff19cfe1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 64477705848018976, guid: 054873fb4d8fb414f9c75a47ff19cfe1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6260,6 +6264,7 @@ GameObject:
   - component: {fileID: 1777015115}
   - component: {fileID: 1777015114}
   - component: {fileID: 1777015117}
+  - component: {fileID: 1777015118}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -6444,6 +6449,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56f74e790b607b4e8af844a842d51d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1777015118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777015106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be88a72ab0b063a448dbe80cebd0cdb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _phMats:
+  - {fileID: 13400000, guid: ecda60bb52da5dd4cb42ae4f4962d24b, type: 2}
+  - {fileID: 13400000, guid: 501dc9c6ae0d24e4682e04f76a65260d, type: 2}
+  - {fileID: 13400000, guid: 7fd155be5691cd24797fd888e1cea4aa, type: 2}
 --- !u!1 &1784706419
 GameObject:
   m_ObjectHideFlags: 0

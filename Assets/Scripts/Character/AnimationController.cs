@@ -9,6 +9,8 @@ public class AnimationController : MonoBehaviour
     private PlayerInput _plInput;
     private PlayerMovement _plMovement;
 
+    private const float _nearZero = -0.1f; 
+
     private void Awake()
     {
         _animC = GetComponent<Animator>();
@@ -23,13 +25,15 @@ public class AnimationController : MonoBehaviour
         _animC.SetBool("IsGrounded", _grChecker.IsGrounded);
         _animC.SetBool("IsScope", _plInput.Scope);
 
+        Debug.Log("—корость по у" + _plMovement.PlayerSpeed.y);
+
         switch (_plMovement.PlayerSpeed.y)
         {
-            case < 0:
+            case < _nearZero:
                 _animC.SetBool("FreeFall", true);
                 _animC.SetBool("IsJump", false);
                 break;
-            case 0:
+            case > _nearZero:
                 _animC.SetBool("FreeFall", false);
                 break;
             default: break;

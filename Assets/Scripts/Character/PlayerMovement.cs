@@ -22,10 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 PlayerSpeed { get; private set; }
 
     private void Update()
-    {
-        Debug.Log(_rb.linearVelocity.x);
-        if (PlayerSpeed == Vector2.zero ) 
-            _rb.linearVelocity = new Vector2(Vector2.zero.x, _rb.linearVelocity.y);
+    {        
+        
     }
 
     private void OnEnable()
