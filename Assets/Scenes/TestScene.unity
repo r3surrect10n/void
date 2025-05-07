@@ -2264,7 +2264,15 @@ PrefabInstance:
     - target: {fileID: 181935167089080255, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: dd30472867715204e961208f8bca93aa, type: 2}
+      objectReference: {fileID: 9100000, guid: 9f6454ad9aa2f1c499e07ab0a842b3f4, type: 2}
+    - target: {fileID: 181935167089080255, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 181935167089080255, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6432473056479889059, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
       propertyPath: m_Name
       value: SM_Chr_SpaceSoldier_Helmet_Female_01
@@ -6291,7 +6299,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.28
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: -0.05, z: 0}
@@ -6462,9 +6470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _phMats:
-  - {fileID: 13400000, guid: ecda60bb52da5dd4cb42ae4f4962d24b, type: 2}
   - {fileID: 13400000, guid: 501dc9c6ae0d24e4682e04f76a65260d, type: 2}
   - {fileID: 13400000, guid: 7fd155be5691cd24797fd888e1cea4aa, type: 2}
+  _secondsOfJumpMat: 0
 --- !u!1 &1784706419
 GameObject:
   m_ObjectHideFlags: 0

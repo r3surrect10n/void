@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class ApplyPhysicsMat : MonoBehaviour
 {
-    [Header("0 - Player move material\n1 - Player jump material\n2 - Player idle material")]
+    [Header("0 - Player default material\n1 - Player idle material")]
     [SerializeField] private PhysicsMaterial[] _phMats;
+
+    [Header("Seconds of jump material")]
+    [SerializeField] private float _secondsOfJumpMat;
         
     private PlayerMovement _plMovement;
     private GroundChecker _grChecker;
-    private Collider _plCol;
-    
+    private Collider _plCol;   
 
     private void Awake()
     {
@@ -17,26 +19,11 @@ public class ApplyPhysicsMat : MonoBehaviour
         _plCol = GetComponent<Collider>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        /*if (_grChecker.IsGrounded)
-        {
-            _plCol.material = _phMats[0];
-
-            if (_plMovement.PlayerSpeed.x == 0)
-                _plCol.material = _phMats[2];
-        }
-        else if (Mathf.Abs(_plMovement.PlayerSpeed.y) > 0)
-            _plCol.material = _phMats[1];*/
-
-        if (!_grChecker.IsGrounded)
+        if (_grChecker.IsGrounded && _plMovement.PlayerSpeed.x == 0)
             _plCol.material = _phMats[1];
         else
-        {
-            if (_plMovement.PlayerSpeed.x == 0)
-                _plCol.material = _phMats[2];
-            else
-                _plCol.material = _phMats[0];            
-        }
+            _plCol.material = _phMats[0];
     }
 }

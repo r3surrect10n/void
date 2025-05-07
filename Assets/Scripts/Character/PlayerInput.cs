@@ -31,7 +31,6 @@ public class PlayerInput : MonoBehaviour
             Debug.Log(Scope);
         }
         else
-            Scope = false;
-            
+            Scope = false;            
     }
 }
