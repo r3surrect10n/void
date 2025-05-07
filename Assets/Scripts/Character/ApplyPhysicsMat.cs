@@ -4,9 +4,6 @@ public class ApplyPhysicsMat : MonoBehaviour
 {
     [Header("0 - Player default material\n1 - Player idle material")]
     [SerializeField] private PhysicsMaterial[] _phMats;
-
-    [Header("Seconds of jump material")]
-    [SerializeField] private float _secondsOfJumpMat;
         
     private PlayerMovement _plMovement;
     private GroundChecker _grChecker;
