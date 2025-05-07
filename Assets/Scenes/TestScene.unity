@@ -2264,10 +2264,17 @@ PrefabInstance:
     - target: {fileID: 181935167089080255, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9f6454ad9aa2f1c499e07ab0a842b3f4, type: 2}
+      objectReference: {fileID: 9100000, guid: dd30472867715204e961208f8bca93aa, type: 2}
     - target: {fileID: 181935167089080255, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
       propertyPath: m_AnimatePhysics
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 181935167089080255, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Head'\n\tTransform 'Shoulder_R'\n\tTransform
+        'Head'\n\tTransform 'Shoulder_R'\n\tFrom animation clip 'Aiming@Pistol'"
       objectReference: {fileID: 0}
     - target: {fileID: 181935167089080255, guid: 0b47daa7b52b9764ba4c4b8cdf29869e, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -6430,7 +6437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47f5f3cb8220ab4d8df127c6ffc06ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 4
   _jumpPower: 6
   _jumpCooldown: 0.5
 --- !u!114 &1777015116
@@ -6472,7 +6479,6 @@ MonoBehaviour:
   _phMats:
   - {fileID: 13400000, guid: 501dc9c6ae0d24e4682e04f76a65260d, type: 2}
   - {fileID: 13400000, guid: 7fd155be5691cd24797fd888e1cea4aa, type: 2}
-  _secondsOfJumpMat: 0
 --- !u!1 &1784706419
 GameObject:
   m_ObjectHideFlags: 0
