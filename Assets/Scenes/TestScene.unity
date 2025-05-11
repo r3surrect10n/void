@@ -11068,7 +11068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0b08460f4285043a17f251fe80f599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 10000
   _currentHealth: 0
 --- !u!114 &339378099
 MonoBehaviour:
@@ -11120,7 +11120,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339378097}
-  m_Material: {fileID: 13400000, guid: 501dc9c6ae0d24e4682e04f76a65260d, type: 2}
+  m_Material: {fileID: 13400000, guid: 7fd155be5691cd24797fd888e1cea4aa, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -23927,8 +23927,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263242546}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43394154, y: 0.43394154, z: 0.5582963, w: 0.5582963}
-  m_LocalPosition: {x: 0.1135, y: 0.0379, z: 0.0289}
+  m_LocalRotation: {x: -0.37352023, y: 0.48729068, z: -0.4788364, w: 0.6274921}
+  m_LocalPosition: {x: 0.09683953, y: 0.05094709, z: -0.030539796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26169,7 +26169,7 @@ MonoBehaviour:
   _shootPoint: {fileID: 337422095}
   _bulletMuzzle: {fileID: 1357030603024658}
   _bullet: {fileID: 740470857123720040, guid: 4f007202d215a374684bf18c5ba9a34d, type: 3}
-  _bulletSpeed: 38.3
+  _bulletSpeed: 20
 --- !u!114 &1777015120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54011,7 +54011,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
+  - {fileID: 2100000, guid: 32325f89619e00e4a8b9d25be264cfdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
