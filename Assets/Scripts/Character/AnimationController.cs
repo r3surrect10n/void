@@ -14,12 +14,14 @@ public class AnimationController : MonoBehaviour
     {
         PlayerInput.Jump += AnimOnJump;
         PlayerInput.Fire += AnimOnShot;
+        Health.PlayerIsDead += AnimOnDead;
     }
 
     private void OnDisable()
     {
         PlayerInput.Jump -= AnimOnJump;
         PlayerInput.Fire -= AnimOnShot;
+        Health.PlayerIsDead -= AnimOnDead;
     }
 
     private void Awake()
@@ -61,5 +63,11 @@ public class AnimationController : MonoBehaviour
     {
         if (_plInput.Scope)
             _animC.SetTrigger("Shot");
-    }      
+    }
+    
+    private void AnimOnDead()
+    {
+        _animC.SetLayerWeight(2, 0);
+        _animC.SetBool("IsDead", true);
+    }
 }

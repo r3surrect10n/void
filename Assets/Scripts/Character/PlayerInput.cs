@@ -25,11 +25,8 @@ public class PlayerInput : MonoBehaviour
 
     private void RMBHeld()
     {
-        if (Input.GetButton("Fire2"))
-        {
-            Scope = true;
-            Debug.Log(Scope);
-        }
+        if (Input.GetButton("Fire2"))        
+            Scope = true;        
         else
             Scope = false;            
     }

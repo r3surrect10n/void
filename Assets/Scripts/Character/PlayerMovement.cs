@@ -20,22 +20,20 @@ public class PlayerMovement : MonoBehaviour
     private bool _isReadyToJump;
 
     public Vector2 PlayerSpeed { get; private set; }
-
-    private void Update()
-    {        
-        
-    }
+    public float PlayerRotation {  get; private set; }
 
     private void OnEnable()
     {
         PlayerInput.Move += OnMove;
-        PlayerInput.Jump += OnJump;        
+        PlayerInput.Jump += OnJump;
+        Health.PlayerIsDead += OnDead;
     }
 
     private void OnDisable()
     {
         PlayerInput.Move -= OnMove;
         PlayerInput.Jump -= OnJump;
+        Health.PlayerIsDead -= OnDead;
     }
 
     private void Awake()
@@ -71,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private void Rotation(float direction)
     {
         transform.rotation = Quaternion.Euler(transform.rotation.x, direction >= 0 ? 0 : 180, transform.rotation.z);
+        PlayerRotation = direction;
     }
 
     private IEnumerator JumpCD()
@@ -79,5 +78,10 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(_jumpCooldown);
         _isReadyToJump = true;
         StopCoroutine(JumpCD());
+    }
+
+    private void OnDead()
+    {
+        GetComponent<PlayerInput>().enabled = false;
     }
 }
