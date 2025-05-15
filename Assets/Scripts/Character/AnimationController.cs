@@ -38,9 +38,6 @@ public class AnimationController : MonoBehaviour
         _animC.SetBool("IsGrounded", _grChecker.IsGrounded);
         _animC.SetBool("IsScope", _plInput.Scope);        
 
-        
-        //Debug.Log("—корость по у" + _plMovement.PlayerSpeed.y);
-
         switch (_plMovement.PlayerSpeed.y)
         {
             case < _nearZero:
@@ -66,8 +63,8 @@ public class AnimationController : MonoBehaviour
     }
     
     private void AnimOnDead()
-    {
+    {        
         _animC.SetLayerWeight(2, 0);
-        _animC.SetBool("IsDead", true);
+        _animC.SetBool("IsDead", true);        
     }
 }

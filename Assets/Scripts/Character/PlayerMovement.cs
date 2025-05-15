@@ -83,5 +83,8 @@ public class PlayerMovement : MonoBehaviour
     private void OnDead()
     {
         GetComponent<PlayerInput>().enabled = false;
+        _rb.linearVelocity = new Vector2(Vector2.zero.x, _rb.linearVelocity.y);
+        _rb.isKinematic = true;
+        GetComponent<Collider>().enabled = false;
     }
 }
