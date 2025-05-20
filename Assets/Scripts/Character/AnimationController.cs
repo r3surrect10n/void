@@ -6,7 +6,7 @@ public class AnimationController : MonoBehaviour
     private Animator _animC;
     private GroundChecker _grChecker;
     private PlayerInput _plInput;
-    private PlayerMovement _plMovement;
+    private PlayerMovement _plMovement;    
 
     private const float _nearZero = -0.1f;
 
@@ -15,6 +15,7 @@ public class AnimationController : MonoBehaviour
         PlayerInput.Jump += AnimOnJump;
         PlayerInput.Fire += AnimOnShot;
         Health.PlayerIsDead += AnimOnDead;
+        Health.PlayerIsDamaged += AnimOnHit;
     }
 
     private void OnDisable()
@@ -22,6 +23,7 @@ public class AnimationController : MonoBehaviour
         PlayerInput.Jump -= AnimOnJump;
         PlayerInput.Fire -= AnimOnShot;
         Health.PlayerIsDead -= AnimOnDead;
+        Health.PlayerIsDamaged -= AnimOnHit;
     }
 
     private void Awake()
@@ -66,5 +68,10 @@ public class AnimationController : MonoBehaviour
     {        
         _animC.SetLayerWeight(2, 0);
         _animC.SetBool("IsDead", true);        
+    }
+
+    private void AnimOnHit(float damage)
+    {
+        _animC.SetTrigger("IsHitted");
     }
 }

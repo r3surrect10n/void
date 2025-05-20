@@ -16,6 +16,8 @@ public class Shooter : MonoBehaviour
 
     private ParticleSystem[] _muzzlePS;
 
+    [SerializeField] private int _ammo;
+
     private void OnEnable()
     {
         PlayerInput.Fire += OnShoot;
@@ -36,13 +38,15 @@ public class Shooter : MonoBehaviour
 
     private void OnShoot()
     {
-        if (_plInput.Scope)
+        if (_plInput.Scope && _ammo > 0)
         {
             GunMuzzle();            
             
             Bullet newBullet = Instantiate(_bullet, _shootPoint.transform.position, Quaternion.identity);
             newBullet.BulletInitialize(_bulletSpeed, _plMovement.PlayerRotation);            
         }
+        
+
     }
 
     private void GunMuzzle()

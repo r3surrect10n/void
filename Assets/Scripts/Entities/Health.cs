@@ -5,10 +5,11 @@ public class Health : MonoBehaviour
 {
     public static event Action EnemyIsDead;
     public static event Action PlayerIsDead;
+    public static event Action<float> PlayerIsDamaged;
 
     [SerializeField] private float _maxHealth;
 
-    [SerializeField] private float _currentHealth;
+    private float _currentHealth;   
 
     private void Awake()
     {
@@ -18,7 +19,12 @@ public class Health : MonoBehaviour
     public void TakingDamage(float damage)
     {
         if (_currentHealth > damage)
+        {
             _currentHealth -= damage;
+
+            if (gameObject.GetComponent<PlayerMovement>())
+                PlayerIsDamaged?.Invoke(_currentHealth);
+        }
         else
         {
             _currentHealth = 0;
@@ -33,8 +39,10 @@ public class Health : MonoBehaviour
 
     private void OnDeath()
     {
-        if (GetComponent<PlayerMovement>())        
-            PlayerIsDead?.Invoke();        
+        if (GetComponent<PlayerMovement>())
+        {
+            PlayerIsDead?.Invoke();
+        }
         else if (GetComponent<Bullet>())
             EnemyIsDead?.Invoke();
         else 
