@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 
 public class AnimationController : MonoBehaviour
-{    
+{
+    public static event Action IsReloaded;
+
     private Animator _animC;
     private GroundChecker _grChecker;
     private PlayerInput _plInput;
@@ -16,6 +19,7 @@ public class AnimationController : MonoBehaviour
         PlayerInput.Fire += AnimOnShot;
         Health.PlayerIsDead += AnimOnDead;
         Health.PlayerIsDamaged += AnimOnHit;
+        Shooter.NoAmmo += AnimOnReload;
     }
 
     private void OnDisable()
@@ -24,14 +28,15 @@ public class AnimationController : MonoBehaviour
         PlayerInput.Fire -= AnimOnShot;
         Health.PlayerIsDead -= AnimOnDead;
         Health.PlayerIsDamaged -= AnimOnHit;
+        Shooter.NoAmmo -= AnimOnReload;
     }
 
     private void Awake()
-    {
+    {        
         _animC = GetComponent<Animator>();
         _plInput = GetComponentInParent<PlayerInput>();
         _plMovement = GetComponentInParent<PlayerMovement>();
-        _grChecker = GetComponentInParent<GroundChecker>();
+        _grChecker = GetComponentInParent<GroundChecker>();        
     }
 
     private void Update()
@@ -50,7 +55,7 @@ public class AnimationController : MonoBehaviour
                 _animC.SetBool("FreeFall", false);
                 break;
             default: break;
-        }
+        }            
     }    
 
     private void AnimOnJump()
@@ -73,5 +78,15 @@ public class AnimationController : MonoBehaviour
     private void AnimOnHit(float damage)
     {
         _animC.SetTrigger("IsHitted");
+    }
+
+    private void AnimOnReload()
+    {
+        _animC.SetTrigger("IsReloading");
+    }
+
+    private void ReloadComlete()
+    {
+        IsReloaded?.Invoke();
     }
 }

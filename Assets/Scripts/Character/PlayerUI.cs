@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private Material _hpMat;
+    [SerializeField] private Image _hpUI;
+    [SerializeField] private Image _ammoUI;
 
     private void OnEnable()
     {
@@ -17,8 +19,6 @@ public class PlayerUI : MonoBehaviour
 
     private void SetHPUI(float hp)
     {
-        Color32 hpColor = new Color32(0xFF, 0x00, 0x00, 0xFF); // Красный цвет
-        //_hpMat.material.GetColor(0);
-        Debug.Log(_hpMat);
+        _hpUI.fillAmount = 1 - (1 / hp);
     }
 }
