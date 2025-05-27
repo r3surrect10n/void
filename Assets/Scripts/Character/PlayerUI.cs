@@ -8,17 +8,26 @@ public class PlayerUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Health.PlayerIsDamaged += SetHPUI;
+        Health.PlayerSetUI += SetHPUI;
     }
 
     private void OnDisable()
     {
-        Health.PlayerIsDamaged -= SetHPUI;
+        Health.PlayerSetUI -= SetHPUI;
     }
-    
 
-    private void SetHPUI(float hp)
+
+    private void SetHPUI(float maxHP, float currentHP)
     {
-        _hpUI.fillAmount = 1 - (1 / hp);
+        Debug.Log(currentHP);
+
+        if (currentHP > 0)
+        {
+            _hpUI.fillAmount = currentHP / maxHP;
+        }
+        else
+        {
+            _hpUI.fillAmount = currentHP;
+        }
     }
 }

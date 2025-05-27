@@ -5,7 +5,8 @@ public class Health : MonoBehaviour
 {
     public static event Action EnemyIsDead;
     public static event Action PlayerIsDead;
-    public static event Action<float> PlayerIsDamaged;
+    public static event Action PlayerIsDamaged;
+    public static event Action<float, float> PlayerSetUI;
 
     [SerializeField] private float _maxHealth;
 
@@ -22,13 +23,17 @@ public class Health : MonoBehaviour
         {
             _currentHealth -= damage;
 
-            if (gameObject.GetComponent<PlayerMovement>())
-                PlayerIsDamaged?.Invoke(_currentHealth);
         }
         else
         {
             _currentHealth = 0;
             OnDeath();
+        }
+
+        if (gameObject.GetComponent<PlayerMovement>())
+        {
+            PlayerSetUI?.Invoke(_maxHealth, _currentHealth);
+            PlayerIsDamaged?.Invoke(); 
         }
     }
 

@@ -75,7 +75,7 @@ public class AnimationController : MonoBehaviour
         _animC.SetBool("IsDead", true);        
     }
 
-    private void AnimOnHit(float damage)
+    private void AnimOnHit()
     {
         _animC.SetTrigger("IsHitted");
     }
