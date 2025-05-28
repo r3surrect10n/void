@@ -4,6 +4,7 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     public static event Action NoAmmo;
+    public static event Action<float, float> SetAmmoUI;
 
     [Header ("GO and Script settings")]
     [SerializeField] private GameObject _shootPoint;
@@ -54,6 +55,8 @@ public class Shooter : MonoBehaviour
 
             _currentAmmo--;
 
+            SetAmmoUI?.Invoke(_currentAmmo, _ammo);
+
             if (_currentAmmo == 0)
                 NoAmmo?.Invoke();
          }
@@ -68,5 +71,7 @@ public class Shooter : MonoBehaviour
     private void OnReloadComplete()
     {
         _currentAmmo = _ammo;
+
+        SetAmmoUI?.Invoke(_currentAmmo, _ammo);
     }
 }

@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: b836bb0d27af28a408909323eac47f4d, type: 2}
-  m_Color: {r: 1, g: 0.04171858, b: 0, a: 1}
+  m_Material: {fileID: 2100000, guid: ea866bb84797bb1428ec6a55ddc52c9a, type: 2}
+  m_Color: {r: 1, g: 0.043137256, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5374,7 +5374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.3487816, y: 132.0982}
+  m_AnchoredPosition: {x: -6.3487854, y: 132.0982}
   m_SizeDelta: {x: 3.3519, y: 230.4383}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &111660048
@@ -13235,7 +13235,7 @@ GameObject:
   - component: {fileID: 746929423}
   - component: {fileID: 746929426}
   - component: {fileID: 746929427}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -13336,7 +13336,7 @@ MonoBehaviour:
   m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 33
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -25752,7 +25752,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 746929424}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -25762,8 +25762,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1303404513
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1504110716
 RectTransform:

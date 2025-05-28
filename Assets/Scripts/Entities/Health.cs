@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;    
+        _currentHealth = _maxHealth;       
     }
 
     public void TakingDamage(float damage)
@@ -23,6 +23,8 @@ public class Health : MonoBehaviour
         {
             _currentHealth -= damage;
 
+            if (gameObject.GetComponent<PlayerMovement>())        
+                PlayerIsDamaged?.Invoke();
         }
         else
         {
@@ -30,11 +32,8 @@ public class Health : MonoBehaviour
             OnDeath();
         }
 
-        if (gameObject.GetComponent<PlayerMovement>())
-        {
+        if (gameObject.GetComponent<PlayerMovement>())    
             PlayerSetUI?.Invoke(_maxHealth, _currentHealth);
-            PlayerIsDamaged?.Invoke(); 
-        }
     }
 
     public void OnHealing(float healing)
