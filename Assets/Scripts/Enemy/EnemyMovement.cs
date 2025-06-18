@@ -37,12 +37,7 @@ public class EnemyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         OnMove();
-    }
-
-    //public void OnRotation()
-    //{
-    //    EnemyDirection = -EnemyDirection;
-    //}
+    }    
 
     private void OnMove()
     {
