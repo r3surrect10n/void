@@ -7,15 +7,13 @@ public class EnemyAnimationController : MonoBehaviour
     public static event Action IsReloaded;
 
     private Animator _animC;    
-    private EnemyMovement _enMovement;    
-
-    private const float _nearZero = -0.1f;
+    private EnemyMovement _enMovement; 
+    private Health _health;    
 
     private void OnEnable()
     {
         
-        //PlayerInput.Fire += AnimOnShot;
-        Health.EnemyIsDead += AnimOnDead;
+        //PlayerInput.Fire += AnimOnShot;        
         //Health.PlayerIsDamaged += AnimOnHit;
         //Shooter.NoAmmo += AnimOnReload;
     }
@@ -24,7 +22,7 @@ public class EnemyAnimationController : MonoBehaviour
     {
         
         //PlayerInput.Fire -= AnimOnShot;
-        Health.EnemyIsDead -= AnimOnDead;
+        
         //Health.PlayerIsDamaged -= AnimOnHit;
         //Shooter.NoAmmo -= AnimOnReload;
     }
@@ -32,25 +30,23 @@ public class EnemyAnimationController : MonoBehaviour
     private void Awake()
     {        
         _animC = GetComponent<Animator>();
-        _enMovement = GetComponentInParent<EnemyMovement>();            
+        _enMovement = GetComponentInParent<EnemyMovement>(); 
+        _health = GetComponentInParent<Health>();
+    }
+
+    private void Start()
+    {
+        _animC.SetBool("IsScope", true);
     }
 
     private void Update()
     {
         _animC.SetFloat("Speed", Mathf.Abs(_enMovement.EnemySpeed.x));        
         //_animC.SetBool("IsScope", _plInput.Scope);        
+        
+        if (_health.EnemyIsDead)
+            AnimOnDead();
 
-        switch (_enMovement.EnemySpeed.y)
-        {
-            case < _nearZero:
-                _animC.SetBool("FreeFall", true);
-                _animC.SetBool("IsJump", false);
-                break;
-            case > _nearZero:
-                _animC.SetBool("FreeFall", false);
-                break;
-            default: break;
-        }            
     }
 
     //private void AnimOnShot()

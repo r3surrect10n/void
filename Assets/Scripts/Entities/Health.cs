@@ -2,19 +2,23 @@ using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
-{
-    public static event Action EnemyIsDead;
+{    
     public static event Action PlayerIsDead;
     public static event Action PlayerIsDamaged;
     public static event Action<float, float> PlayerSetUI;
 
     [SerializeField] private float _maxHealth;
 
-    private float _currentHealth;   
+    private float _currentHealth;
+    
+    public bool EnemyIsDead { get; private set; }
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;       
+        _currentHealth = _maxHealth;
+
+        if (GetComponent<EnemyMovement>())
+            EnemyIsDead = false;
     }
 
     public void TakingDamage(float damage)
@@ -47,9 +51,9 @@ public class Health : MonoBehaviour
         {
             PlayerIsDead?.Invoke();
         }
-        else if (GetComponent<Bullet>())
-            EnemyIsDead?.Invoke();
-        else 
+        else if (GetComponent<EnemyMovement>())
+            EnemyIsDead = true;
+        else
             Destroy(gameObject);
     }
 }

@@ -1,33 +1,26 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
 public class EnemyMovement : MonoBehaviour
-{
-    [SerializeField] private Health _enemyHealth;
-
+{  
     [Header("Speed and direction settings")]
     [SerializeField, Range(0, 20)] private float _moveSpeed;
     [SerializeField] private float _startDirection;
 
+    [SerializeField] private float _enemyCheckingTime;
+
+    private Health _enemyHealth;
     private Rigidbody _rb;        
 
     public Vector2 EnemySpeed { get; private set; }
-    public float EnemyDirection {  get; private set; }    
-
-    private void OnEnable()
-    {               
-        Health.EnemyIsDead += OnDead;
-    }
-
-    private void OnDisable()
-    {               
-        Health.EnemyIsDead -= OnDead;
-    }
+    public float EnemyDirection {  get; private set; }
 
     private void Awake()
     {        
-        _rb = GetComponent<Rigidbody>();        
+        _rb = GetComponent<Rigidbody>(); 
+        _enemyHealth = GetComponent<Health>();
     }
 
     private void Start()
@@ -35,10 +28,21 @@ public class EnemyMovement : MonoBehaviour
         EnemyDirection = _startDirection;
     }
 
+    private void Update()
+    {
+        if (_enemyHealth.EnemyIsDead)
+            OnDead();
+    }
+
     private void FixedUpdate()
     {
         OnMove();
     }
+
+    //public void OnRotation()
+    //{
+    //    EnemyDirection = -EnemyDirection;
+    //}
 
     private void OnMove()
     {
@@ -65,8 +69,22 @@ public class EnemyMovement : MonoBehaviour
         GetComponent<Collider>().enabled = false;
     }
 
-    public void OnRotation()
+    private void OnTriggerEnter(Collider other)
     {
-        EnemyDirection = -EnemyDirection;
+        if (other.GetComponent<Stopper>())
+            StartCoroutine(OnRotation());
     }
+
+    private IEnumerator OnRotation()
+    {
+        float enemyCurrentDirection = EnemyDirection;
+        EnemyDirection = 0;
+
+        yield return new WaitForSeconds(_enemyCheckingTime);
+
+        EnemyDirection = -enemyCurrentDirection;
+
+        StopCoroutine(OnRotation());
+    }
+
 }
