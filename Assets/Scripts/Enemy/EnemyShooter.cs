@@ -3,10 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
-{
-    public static event Action NoAmmo;
-    public static event Action<float, float> SetAmmoUI;
-
+{ 
     [Header("GO and Script settings")]
     [SerializeField] private Animator _enAnimC;
     [SerializeField] private GameObject _shootPoint;
@@ -52,42 +49,32 @@ public class EnemyShooter : MonoBehaviour
     }
 
     private void OnShoot()
-    {      
-         
+    {
         GunMuzzle();
 
         _enAnimC.SetTrigger("Shot");
 
         EnemyBullet newBullet = Instantiate(_bullet, _shootPoint.transform.position, Quaternion.identity);
-        newBullet.BulletInitialize(_bulletSpeed, _enMovement.BeforeStopEnemyDirection);
-
-        _currentAmmo--;        
-
-        if (_currentAmmo == 0)
-        { }
-         
+        newBullet.BulletInitialize(_bulletSpeed, _enMovement.BeforeStopEnemyDirection);         
     }
 
     private void GunMuzzle()
     {
         foreach (ParticleSystem partSys in _muzzlePS)            
             partSys.Play();
-    }
-
-    private void OnReloadComplete()
-    {
-        _currentAmmo = _ammo;        
-    }
+    }    
 
     private IEnumerator EnemyShooting()
     {
-        while (!_enHealth.EnemyIsDead)
+        while (true)
         {
             yield return new WaitForSeconds(_shootCD);
-            OnShoot();
-        }
 
-        StopCoroutine(_shooterCoroutine);
+            if (!_enHealth.EnemyIsDead)
+                OnShoot();
+            else
+                Destroy(this);
+        }        
     }
 
     private void PlayerIsDead()

@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
 public class EnemyMovement : MonoBehaviour
-{  
+{ 
     [Header("Speed and direction settings")]
     [SerializeField, Range(0, 20)] private float _moveSpeed;
     [SerializeField] private float _startDirection;
@@ -12,7 +13,9 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _enemyCheckingTime;
 
     private Health _enemyHealth;
-    private Rigidbody _rb;        
+    private Rigidbody _rb;
+
+    private bool _playerSpotted;
 
     public Vector2 EnemySpeed { get; private set; }
     public float EnemyDirection {  get; private set; }
@@ -26,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        _playerSpotted = false;
+
         EnemyDirection = _startDirection;
     }
 
@@ -42,7 +47,11 @@ public class EnemyMovement : MonoBehaviour
     }    
     public void OnPlayerSpotting()
     {
-        BeforeStopEnemyDirection = EnemyDirection;
+        _playerSpotted = !_playerSpotted;
+
+        if (EnemyDirection != 0)
+            BeforeStopEnemyDirection = EnemyDirection;
+
         EnemyDirection = 0;
     }
 
@@ -67,8 +76,11 @@ public class EnemyMovement : MonoBehaviour
     private void OnDead()
     {
         _rb.linearVelocity = new Vector2(Vector2.zero.x, _rb.linearVelocity.y);
-        _rb.isKinematic = true;
+        _rb.isKinematic = true;       
+
         GetComponent<Collider>().enabled = false;
+
+        Destroy(this);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -80,11 +92,13 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator OnRotation()
     {
         float enemyCurrentDirection = EnemyDirection;
+        BeforeStopEnemyDirection = enemyCurrentDirection;
         EnemyDirection = 0;
 
         yield return new WaitForSeconds(_enemyCheckingTime);
 
-        EnemyDirection = -enemyCurrentDirection;
+        if (!_playerSpotted)
+            EnemyDirection = -enemyCurrentDirection;
 
         StopCoroutine(OnRotation());
     }
