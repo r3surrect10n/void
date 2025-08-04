@@ -2,20 +2,35 @@ using UnityEngine;
 
 public class EnemySpotting : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemyHead;
+    [SerializeField] private Transform _enemyHead;
     [SerializeField] private float _enemySpotDistance;
     [SerializeField] private LayerMask _playerLayer;
 
-    private Ray _enemyLook;
+    private EnemyMovement _enemyMovement;
+    private EnemyShooter _enemyShooter;
+    
     private RaycastHit _enemyLookHit;
 
-    private void Update()
+    private bool _playerSpotted = false;
+
+    private void Awake()
     {
+        _enemyMovement = GetComponent<EnemyMovement>();
+        _enemyShooter = GetComponent<EnemyShooter>();
+    }
+
+    private void Update()
+    {        
+
+        Debug.DrawRay(_enemyHead.position, _enemyHead.forward * _enemySpotDistance, Color.red);  
         
+        if (!_playerSpotted)
 
-        if (Physics.Raycast(_enemyLook, _enemySpotDistance, _playerLayer))
+        if (Physics.Raycast(_enemyHead.position, _enemyHead.forward, out _enemyLookHit, _enemySpotDistance, _playerLayer))
         {
-
+            _enemyMovement.OnPlayerSpotting();
+            _enemyShooter.EnemyStartShooting();
+            _playerSpotted = true;
         }
     }
 }

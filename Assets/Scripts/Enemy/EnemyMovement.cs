@@ -16,6 +16,7 @@ public class EnemyMovement : MonoBehaviour
 
     public Vector2 EnemySpeed { get; private set; }
     public float EnemyDirection {  get; private set; }
+    public float BeforeStopEnemyDirection {  get; private set; }
 
     private void Awake()
     {        
@@ -28,6 +29,7 @@ public class EnemyMovement : MonoBehaviour
         EnemyDirection = _startDirection;
     }
 
+
     private void Update()
     {
         if (_enemyHealth.EnemyIsDead)
@@ -38,6 +40,11 @@ public class EnemyMovement : MonoBehaviour
     {
         OnMove();
     }    
+    public void OnPlayerSpotting()
+    {
+        BeforeStopEnemyDirection = EnemyDirection;
+        EnemyDirection = 0;
+    }
 
     private void OnMove()
     {
