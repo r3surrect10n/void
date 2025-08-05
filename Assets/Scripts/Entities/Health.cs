@@ -40,9 +40,12 @@ public class Health : MonoBehaviour
             PlayerSetUI?.Invoke(_maxHealth, _currentHealth);
     }
 
-    public void OnHealing(float healing)
+    public void OnHealing()
     {
-        _currentHealth += healing;
+        _currentHealth = _maxHealth;
+
+        if (gameObject.GetComponent<PlayerMovement>())
+            PlayerSetUI?.Invoke(_maxHealth, _currentHealth);
     }
 
     private void OnDeath()
