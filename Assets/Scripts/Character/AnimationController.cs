@@ -20,7 +20,9 @@ public class AnimationController : MonoBehaviour
         Health.PlayerIsDead += AnimOnDead;
         Health.PlayerIsDamaged += AnimOnHit;
         Shooter.NoAmmo += AnimOnReload;
-    }
+
+        Jumper.OnJump += AnimOnJump;
+    }    
 
     private void OnDisable()
     {
@@ -29,6 +31,8 @@ public class AnimationController : MonoBehaviour
         Health.PlayerIsDead -= AnimOnDead;
         Health.PlayerIsDamaged -= AnimOnHit;
         Shooter.NoAmmo -= AnimOnReload;
+
+        Jumper.OnJump -= AnimOnJump;
     }
 
     private void Awake()

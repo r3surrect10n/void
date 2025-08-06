@@ -25,12 +25,12 @@ public class EnemyShooter : MonoBehaviour
 
     private void OnEnable()
     {
-        Health.PlayerIsDead += PlayerIsDead;
+        Health.PlayerIsDead += EnemyStopShooting;
     }
 
     private void OnDisable()
     {
-        Health.PlayerIsDead -= PlayerIsDead;
+        Health.PlayerIsDead -= EnemyStopShooting;
     }
 
     private void Awake()
@@ -46,6 +46,12 @@ public class EnemyShooter : MonoBehaviour
     public void EnemyStartShooting()
     {
         _shooterCoroutine = StartCoroutine(EnemyShooting());
+    }
+
+    public void EnemyStopShooting()
+    {
+        if (!_enHealth.EnemyIsDead)
+            StopCoroutine(_shooterCoroutine);
     }
 
     private void OnShoot()
@@ -75,11 +81,5 @@ public class EnemyShooter : MonoBehaviour
             else
                 Destroy(this);
         }        
-    }
-
-    private void PlayerIsDead()
-    {
-        Debug.Log("KILL");
-        StopCoroutine(_shooterCoroutine);
-    }
+    }    
 }

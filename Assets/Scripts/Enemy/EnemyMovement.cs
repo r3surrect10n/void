@@ -55,6 +55,14 @@ public class EnemyMovement : MonoBehaviour
         EnemyDirection = 0;
     }
 
+    public void OnPlayerMissing()
+    {
+        _playerSpotted = !_playerSpotted;
+
+        if (EnemyDirection == 0)
+            EnemyDirection = BeforeStopEnemyDirection;
+    }
+
     private void OnMove()
     {
         if (EnemyDirection != 0)

@@ -22,15 +22,22 @@ public class EnemySpotting : MonoBehaviour
     private void Update()
     {        
 
-        Debug.DrawRay(_enemyHead.position, _enemyHead.forward * _enemySpotDistance, Color.red);  
-        
-        if (!_playerSpotted)
+        Debug.DrawRay(_enemyHead.position, _enemyHead.forward * _enemySpotDistance, Color.red);
 
-        if (Physics.Raycast(_enemyHead.position, _enemyHead.forward, out _enemyLookHit, _enemySpotDistance, _playerLayer))
+        if (!_playerSpotted)
         {
-            _enemyMovement.OnPlayerSpotting();
-            _enemyShooter.EnemyStartShooting();
-            _playerSpotted = true;
+            if (Physics.Raycast(_enemyHead.position, _enemyHead.forward, out _enemyLookHit, _enemySpotDistance, _playerLayer))
+            {
+                _enemyMovement.OnPlayerSpotting();
+                _enemyShooter.EnemyStartShooting();
+                _playerSpotted = true;
+            }
+        }
+        else if (_playerSpotted && !Physics.Raycast(_enemyHead.position, _enemyHead.forward, out _enemyLookHit, _enemySpotDistance, _playerLayer))
+        {
+            _playerSpotted = false;
+            _enemyMovement.OnPlayerMissing();
+            _enemyShooter.EnemyStopShooting();
         }
     }
 }
