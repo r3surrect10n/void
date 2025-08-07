@@ -6,8 +6,16 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Image _hpUI;
     [SerializeField] private Image _ammoUI;
 
+    [SerializeField] private Text _pointsText;
+
+    private PlayerCollect _playerCollect;
+
     private void OnEnable()
     {
+        _playerCollect = GetComponent<PlayerCollect>();
+
+        _playerCollect.AddScores += SetScoresUI;
+
         Health.PlayerSetUI += SetHPUI;
         Shooter.SetAmmoUI += SetAmmoUI;
 
@@ -15,6 +23,8 @@ public class PlayerUI : MonoBehaviour
 
     private void OnDisable()
     {
+        _playerCollect.AddScores -= SetScoresUI;
+
         Health.PlayerSetUI -= SetHPUI;
         Shooter.SetAmmoUI -= SetAmmoUI;
     }
@@ -42,5 +52,10 @@ public class PlayerUI : MonoBehaviour
         {
             _ammoUI.fillAmount = currentAmmo;
         }
+    }
+
+    private void SetScoresUI(int scores)
+    {
+        _pointsText.text = $"{scores:D4}";
     }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 
 public class EnemyMovement : MonoBehaviour
-{ 
+{
+    public static event Action KillScores;
+
     [Header("Speed and direction settings")]
     [SerializeField, Range(0, 20)] private float _moveSpeed;
     [SerializeField] private float _startDirection;
@@ -83,6 +85,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnDead()
     {
+        KillScores?.Invoke();
+
         _rb.linearVelocity = new Vector2(Vector2.zero.x, _rb.linearVelocity.y);
         _rb.isKinematic = true;       
 

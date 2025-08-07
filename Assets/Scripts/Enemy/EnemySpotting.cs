@@ -28,9 +28,12 @@ public class EnemySpotting : MonoBehaviour
         {
             if (Physics.Raycast(_enemyHead.position, _enemyHead.forward, out _enemyLookHit, _enemySpotDistance, _playerLayer))
             {
-                _enemyMovement.OnPlayerSpotting();
-                _enemyShooter.EnemyStartShooting();
-                _playerSpotted = true;
+                if (_enemyShooter != null || _enemyMovement != null)
+                {
+                    _enemyMovement.OnPlayerSpotting();
+                    _enemyShooter.EnemyStartShooting();
+                    _playerSpotted = true;
+                }
             }
         }
         else if (_playerSpotted && !Physics.Raycast(_enemyHead.position, _enemyHead.forward, out _enemyLookHit, _enemySpotDistance, _playerLayer))
