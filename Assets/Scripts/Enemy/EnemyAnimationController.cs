@@ -8,24 +8,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     private Animator _animC;    
     private EnemyMovement _enMovement; 
-    private Health _health;    
-
-    private void OnEnable()
-    {
-        
-        //PlayerInput.Fire += AnimOnShot;        
-        //Health.PlayerIsDamaged += AnimOnHit;
-        //Shooter.NoAmmo += AnimOnReload;
-    }
-
-    private void OnDisable()
-    {
-        
-        //PlayerInput.Fire -= AnimOnShot;
-        
-        //Health.PlayerIsDamaged -= AnimOnHit;
-        //Shooter.NoAmmo -= AnimOnReload;
-    }
+    private Health _health;
 
     private void Awake()
     {        
@@ -41,19 +24,12 @@ public class EnemyAnimationController : MonoBehaviour
 
     private void Update()
     {
-        _animC.SetFloat("Speed", Mathf.Abs(_enMovement.EnemySpeed.x));        
-        //_animC.SetBool("IsScope", _plInput.Scope);        
+        _animC.SetFloat("Speed", Mathf.Abs(_enMovement.EnemySpeed.x));            
         
         if (_health.EnemyIsDead)
             AnimOnDead();
 
-    }
-
-    //private void AnimOnShot()
-    //{
-    //    if (_plInput.Scope)
-    //        _animC.SetTrigger("Shot");
-    //}
+    }   
     
     private void AnimOnDead()
     {        
