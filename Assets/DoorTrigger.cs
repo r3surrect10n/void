@@ -22,4 +22,10 @@ public class DoorTrigger : MonoBehaviour
         if (other.GetComponent<PlayerMovement>())
             _animator.SetBool("IsOpen", false);
     }
+
+    public void UnlockDoor()
+    {
+        if (!_doorStatus)
+            _doorStatus = !_doorStatus;
+    }
 }
