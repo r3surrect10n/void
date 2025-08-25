@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManagement : MonoBehaviour
 {
+    [SerializeField] private GameObject _pauseMenu;
+
     private void OnEnable()
     {
         Resume();
@@ -15,11 +17,17 @@ public class ButtonManagement : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0f;
+        PauseMenu(0f, true);
     }
 
     public void Resume()
     {
-        Time.timeScale = 1f;
+        PauseMenu(1f, false);
+    }
+
+    private void PauseMenu(float timeScale, bool isPause)
+    {
+        Time.timeScale = timeScale;
+        _pauseMenu.SetActive(isPause);
     }
 }
