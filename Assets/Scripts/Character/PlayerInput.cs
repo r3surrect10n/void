@@ -36,7 +36,7 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetButtonDown("Jump"))        
             Jump?.Invoke();
 
-        if (_canShoot)
+        if (_canShoot && Scope)
         {
             if (Input.GetButtonDown("Fire1"))
                 Fire?.Invoke();

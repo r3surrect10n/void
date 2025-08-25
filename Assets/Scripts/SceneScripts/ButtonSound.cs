@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class ButtonSound : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private AudioSource _audioSource;
 
-    // Update is called once per frame
-    void Update()
+   public void PlaySound(AudioClip clip)
     {
-        
+        _audioSource.PlayOneShot(clip);
     }
 }

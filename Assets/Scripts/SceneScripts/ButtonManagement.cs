@@ -7,7 +7,12 @@ public class ButtonManagement : MonoBehaviour
 
     private void OnEnable()
     {
-        Resume();
+        Application.targetFrameRate = 90;
+
+        if (SceneManager.GetActiveScene().name == "GameScene")
+            Resume();
+        else
+            Time.timeScale = 1f;
     }
 
     public void LoadScene(string sceneName)
@@ -23,6 +28,11 @@ public class ButtonManagement : MonoBehaviour
     public void Resume()
     {
         PauseMenu(1f, false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     private void PauseMenu(float timeScale, bool isPause)
