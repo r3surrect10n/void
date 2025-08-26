@@ -27,5 +27,5 @@ public class DoorTrigger : MonoBehaviour
     {
         if (!_doorStatus)
             _doorStatus = !_doorStatus;
-    }
+    }    
 }

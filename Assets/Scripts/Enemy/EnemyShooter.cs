@@ -50,7 +50,7 @@ public class EnemyShooter : MonoBehaviour
 
     public void EnemyStopShooting()
     {
-        if (!_enHealth.EnemyIsDead)
+        if (!_enHealth.EnemyIsDead && _shooterCoroutine != null)
             StopCoroutine(_shooterCoroutine);
     }
 

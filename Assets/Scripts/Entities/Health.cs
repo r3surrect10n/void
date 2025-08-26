@@ -51,7 +51,7 @@ public class Health : MonoBehaviour
     private void OnDeath()
     {
         if (GetComponent<PlayerMovement>())
-        {
+        {            
             PlayerIsDead?.Invoke();
         }
         else if (GetComponent<EnemyMovement>())

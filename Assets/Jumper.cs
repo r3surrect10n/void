@@ -5,6 +5,8 @@ public class Jumper : MonoBehaviour
 {
     public static event Action OnJump;
 
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _jumpClip;
     [SerializeField] private Rigidbody _playerRb;
     [SerializeField] private float _impulseForce;
 
@@ -32,6 +34,7 @@ public class Jumper : MonoBehaviour
 
     public void ForceJump()
     {
+        _audioSource.PlayOneShot(_jumpClip);
         _playerRb.AddForce(Vector3.up * _impulseForce, ForceMode.Impulse);
         OnJump?.Invoke();        
     }

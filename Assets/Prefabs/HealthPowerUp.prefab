@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ad3ff5fcdd38846a1a250ad71c236f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
+  _clip: {fileID: 8300000, guid: d2f945c188b4e42a78e9e5f764dd17c1, type: 3}
   _powerUpKind: Health
 --- !u!1 &4639747901458505000
 GameObject:

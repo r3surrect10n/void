@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     public static event Action IsReloaded;
+    public static event Action IsDead;
 
     private Animator _animC;
     private GroundChecker _grChecker;
@@ -76,7 +77,8 @@ public class AnimationController : MonoBehaviour
     private void AnimOnDead()
     {        
         _animC.SetLayerWeight(2, 0);
-        _animC.SetBool("IsDead", true);        
+        _animC.SetBool("IsDead", true);
+        IsDead?.Invoke();
     }
 
     private void AnimOnHit()
